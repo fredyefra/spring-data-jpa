@@ -68,16 +68,16 @@ public class CustomerSpecification implements Serializable {
 	} 
 	
 	/**
-	 * Lambda Specification 
-	 */
-	public static Specification<Customer> customerByTypePhone(PhoneEnum typePhone){ 
+	* Lambda Specification 
+	*/
+	public static Specification<Customer> customerByTypePhoneAndId(PhoneEnum typePhone, Long id){ 
 		return (root, query, builder) -> {
 			
 		ListJoin<Customer, Phone> phoneJoin = root.join(Customer_.phones, JoinType.INNER);
 	    
 		Predicate predicate = builder.and(
 	    		builder.equal(phoneJoin.get(Phone_.type),typePhone)
-	    		 ,builder.equal(root.get(Customer_.id), 4L));
+	    		 ,builder.equal(root.get(Customer_.id), id));
 	    
 	    query
 			.where(predicate);
@@ -106,7 +106,6 @@ public class CustomerSpecification implements Serializable {
 			 
 		};
 	}
-	
 	
 	/**
 	 * Common Specification

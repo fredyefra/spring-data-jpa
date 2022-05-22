@@ -9,10 +9,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import br.com.spring.jpa.dto.CustomerDTO;
-import br.com.spring.jpa.dto.Mapper;
 import br.com.spring.jpa.enums.AddressEnum;
 import br.com.spring.jpa.enums.PhoneEnum;
-import br.com.spring.jpa.model.Address;
 import br.com.spring.jpa.model.Customer;
 import br.com.spring.jpa.repository.CustomerRepository;
 import br.com.spring.jpa.specification.CustomerSpecification;
@@ -54,17 +52,13 @@ public class CustomerService {
         dto.getAddress().setCity(customer.getAddress().getCity());
         
         return dto;  
-}  
-    
-    
-    
-	public List<Customer> customerByTypePhone(PhoneEnum phone) {
+    }  
+
+    public List<Customer> customerByTypePhone(PhoneEnum phone, Long id) {
 
 		return repository.findAll(Specification
 	    		                  .where
-	    		                  (CustomerSpecification.customerByTypePhone(phone)));
-	    		                  
-	    		                  
+	    		                  (CustomerSpecification.customerByTypePhoneAndId(phone, id)));
 	}
 	
 	public List<Customer> getCustomerByTypeAddress(AddressEnum type) {

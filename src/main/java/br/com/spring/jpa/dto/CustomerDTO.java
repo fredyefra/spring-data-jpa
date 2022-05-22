@@ -14,8 +14,8 @@ public class CustomerDTO implements Serializable {
 
 private static final long serialVersionUID = 1L;
 	
-	//private Long id;
-    @JsonIgnore
+    @JsonIgnore	
+    private Long id;
     private String firstName;
 	private String lastName;
     private Address address;
@@ -25,13 +25,17 @@ private static final long serialVersionUID = 1L;
 		
 	}
 	
-	public CustomerDTO(String firstName, String lastName, Address address, List<Phone> phones) {
+	public CustomerDTO(Long id, String firstName, String lastName, Address address, List<Phone> phones) {
 		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	    this.address = address;
 	    this.phones = phones;
 	}
+	
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
 	
 	public String getFirstName() {return firstName; }
 	public void setFirstName(String firstName) {this.firstName = firstName; }
