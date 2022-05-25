@@ -1,5 +1,6 @@
 package br.com.spring.jpa.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import br.com.spring.jpa.dto.CustomerDTO;
+import br.com.spring.jpa.dto.Mapper;
 import br.com.spring.jpa.enums.AddressEnum;
 import br.com.spring.jpa.enums.PhoneEnum;
 import br.com.spring.jpa.model.Customer;
@@ -21,6 +23,9 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepository repository;
 
+	@Autowired
+	private Mapper mapper;
+	
 	/*
 	 * public List<Customer> findAll(Long id, String lastName) {
 	 * 
@@ -28,37 +33,19 @@ public class CustomerService {
 	 * .and(CustomerSpecification .byLastName(lastName)))); }
 	 */
 
-	
-    public List<CustomerDTO> findAll() {
-	
+	public Collection<CustomerDTO> findAll() {
     	 return ((List<Customer>) repository  
                  .findAll())  
                  .stream()  
-                 .map(this::convertDataIntoDTO)  
+                 .map(mapper::convertDataIntoDTO)  
                          .collect(Collectors.toList());  
-	    
 	}
 	
-    
-    private CustomerDTO convertDataIntoDTO (Customer customer) {  
-        
-          
-    	CustomerDTO dto = new CustomerDTO();  
-          
-        dto.setFirstName(customer.getFirstName());  
-        dto.setLastName(customer.getLastName());
-        
-        dto.setAddress(customer.getAddress());
-        dto.getAddress().setCity(customer.getAddress().getCity());
-        
-        return dto;  
-    }  
-
-    public List<Customer> customerByTypePhone(PhoneEnum phone, Long id) {
+	public List<Customer> customerByTypePhone(PhoneEnum phone) {
 
 		return repository.findAll(Specification
 	    		                  .where
-	    		                  (CustomerSpecification.customerByTypePhoneAndId(phone, id)));
+	    		                  (CustomerSpecification.customerByTypePhone(phone)));
 	}
 	
 	public List<Customer> getCustomerByTypeAddress(AddressEnum type) {

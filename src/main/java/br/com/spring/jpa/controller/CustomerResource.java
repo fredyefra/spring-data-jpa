@@ -1,6 +1,7 @@
 package br.com.spring.jpa.controller;
 
 import java.net.URI;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ public class CustomerResource {
 	private CustomerService service;
 
 	@GetMapping
-	public ResponseEntity<List<CustomerDTO>> findAll() {
-		List<CustomerDTO> customers = service.findAll();
+	public ResponseEntity<Collection<CustomerDTO>> findAll() {
+    Collection<CustomerDTO> customers = service.findAll();
 		return ResponseEntity.ok(customers);
 	}
 

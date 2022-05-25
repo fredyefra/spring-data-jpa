@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Fetch;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
@@ -66,18 +67,38 @@ public class CustomerSpecification implements Serializable {
 
 		};
 	} 
-	
+
 	/**
-	* Lambda Specification 
-	*/
-	public static Specification<Customer> customerByTypePhoneAndId(PhoneEnum typePhone, Long id){ 
+	 * Lambda Specification 
+	 */
+	public static Specification<Customer> findAll(AddressEnum type) {
 		return (root, query, builder) -> {
 			
-		ListJoin<Customer, Phone> phoneJoin = root.join(Customer_.phones, JoinType.INNER);
+			//Join<Customer, Address> addressJoin = root.fetch(Customer_.address);
+			
+			Fetch<Customer, Phone> fetch = root.fetch(Customer_.phones, JoinType.LEFT);
+			
+			//Predicate predicate = builder.equal(addressJoin.get(Address_.type), type);
+			
+			//query
+			    //.where(predicate);
+			
+			return null;
+
+		};
+	} 
+	
+	/**
+	 * Lambda Specification 
+	 */
+	public static Specification<Customer> customerByTypePhone(PhoneEnum typePhone){ 
+		return (root, query, builder) -> {
+			
+		Join<Customer, Phone> phoneJoin = root.join(Customer_.phones, JoinType.INNER);
 	    
 		Predicate predicate = builder.and(
 	    		builder.equal(phoneJoin.get(Phone_.type),typePhone)
-	    		 ,builder.equal(root.get(Customer_.id), id));
+	    		 ,builder.equal(root.get(Customer_.id), null));
 	    
 	    query
 			.where(predicate);
@@ -106,6 +127,7 @@ public class CustomerSpecification implements Serializable {
 			 
 		};
 	}
+	
 	
 	/**
 	 * Common Specification

@@ -1,7 +1,7 @@
 package br.com.spring.jpa.util;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,8 +11,8 @@ import br.com.spring.jpa.enums.PhoneEnum;
 import br.com.spring.jpa.model.Address;
 import br.com.spring.jpa.model.Customer;
 import br.com.spring.jpa.model.Phone;
-import br.com.spring.jpa.repository.AddressRepository;
 import br.com.spring.jpa.repository.CustomerRepository;
+import br.com.spring.jpa.repository.PhoneRepository;
 
 @Service
 public class DataService {
@@ -21,7 +21,7 @@ public class DataService {
 	private CustomerRepository customerRepository;
 	
 	@Autowired
-	private AddressRepository addressRepository;
+	private PhoneRepository phoneRepository;
 	
 	public void startDB() {
 
@@ -30,26 +30,24 @@ public class DataService {
 		Address a3 = new Address(null, "Robertsdale ", "Pensilvania", "3333-3333",AddressEnum.MESSAGE);
 		Address a4 = new Address(null, "Green Sunday ", "California", "4444-4444",AddressEnum.COMMERCIAL);
 		
-		Phone celular = new Phone(null,"1111-1111" ,PhoneEnum.CELL);
 		Phone home = new Phone(null,"1111-1111" ,PhoneEnum.HOME);
-		Phone homePhone = new Phone(null,"1111-1111" ,PhoneEnum.JOB);
+		Phone celular = new Phone(null,"2222-2222" ,PhoneEnum.CELL);
+		//Phone homePhone = new Phone(null,"1111-1111" ,PhoneEnum.JOB);
 		
-		Phone p4 = new Phone(null,"1111-1111" ,PhoneEnum.CELL);
-		Phone p5 = new Phone(null,"1111-1111" ,PhoneEnum.HOME);
+		Collection<Phone> phones1 = Arrays.asList(home);
+		Collection<Phone> phones2 = Arrays.asList(celular);
+		//List<Phone> phones3 = Arrays.asList(homePhone);
 		
-		Phone p6 = new Phone(null,"1111-1111" ,PhoneEnum.JOB);
+		Customer c1 = new Customer(null, "Robert C. Martin", "Martin",null, phones1);
+		Customer c2 = new Customer(null, "Martin Fowler", "Fowler",null,    phones1);
+		Customer c3 = new Customer(null, "James Gosling", "Gosling",a3,   phones1);
+		Customer c4 = new Customer(null, "Erich Gamma", "Gamma",a4, phones1);		
 		
-		List<Phone> phones1 = Arrays.asList(celular,home,homePhone);
-		List<Phone> phones2 = Arrays.asList(celular,home);
-		List<Phone> phones3 = Arrays.asList(homePhone);
-		
-		Customer c1 = new Customer(null, "Robert C. Martin", "Martin",a1, phones1);
-		Customer c2 = new Customer(null, "Martin Fowler", "Fowler",a2,    phones2);
-		Customer c3 = new Customer(null, "James Gosling", "Gosling",a3,   null);
-		Customer c4 = new Customer(null, "Erich Gamma", "Gamma",a4, phones3);		
-		
+		c1.setPhones(phones1);
+		c2.setPhones(phones1);
 		//addressRepository.saveAll(Arrays.asList(a1,a2,a3,a4)); @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-		customerRepository.saveAll(Arrays.asList(c1, c2, c3,c4));
+		
+		customerRepository.saveAll(Arrays.asList(c1,c2));
 
 	}
 }
