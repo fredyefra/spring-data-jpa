@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import br.com.spring.jpa.enums.PhoneEnum;
 
@@ -20,6 +22,7 @@ public class Phone implements Serializable {
 	private Long id;
 	private String number;
 	private PhoneEnum type;
+	private Customer customer;
 	
 	public Phone() {
 		
@@ -42,33 +45,21 @@ public class Phone implements Serializable {
 	public String getNumber() {return number;}
 	public void setNumber(String number) {this.number = number;}
 
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "type")
 	public PhoneEnum getType() {return type;}
 	public void setType(PhoneEnum type) {this.type = type;}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Phone other = (Phone) obj;
-		if (type != other.type)
-			return false;
-		return true;
-	}
-
+	
+	/*
+	 * @Override public int hashCode() { final int prime = 31; int result = 1;
+	 * result = prime * result + ((type == null) ? 0 : type.hashCode()); return
+	 * result; }
+	 * 
+	 * @Override public boolean equals(Object obj) { if (this == obj) return true;
+	 * if (obj == null) return false; if (getClass() != obj.getClass()) return
+	 * false; Phone other = (Phone) obj; if (type != other.type) return false;
+	 * return true; }
+	 */
 		
 		 
 }

@@ -2,7 +2,6 @@ package br.com.spring.jpa.controller;
 
 import java.net.URI;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.spring.jpa.dto.CustomerDTO;
 import br.com.spring.jpa.model.Customer;
 import br.com.spring.jpa.service.CustomerService;
 
@@ -31,8 +29,8 @@ public class CustomerResource {
 	private CustomerService service;
 
 	@GetMapping
-	public ResponseEntity<Collection<CustomerDTO>> findAll() {
-    Collection<CustomerDTO> customers = service.findAll();
+	public ResponseEntity<Collection<Customer>> findAll() {
+    Collection<Customer> customers = service.findAll();
 		return ResponseEntity.ok(customers);
 	}
 

@@ -1,15 +1,14 @@
 package br.com.spring.jpa.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import br.com.spring.jpa.dto.CustomerDTO;
 import br.com.spring.jpa.dto.Mapper;
 import br.com.spring.jpa.enums.AddressEnum;
 import br.com.spring.jpa.enums.PhoneEnum;
@@ -26,19 +25,10 @@ public class CustomerService {
 	@Autowired
 	private Mapper mapper;
 	
-	/*
-	 * public List<Customer> findAll(Long id, String lastName) {
-	 * 
-	 * return repository.findAll(Specification .where(CustomerSpecification.byId(id)
-	 * .and(CustomerSpecification .byLastName(lastName)))); }
-	 */
-
-	public Collection<CustomerDTO> findAll() {
+	public Collection<Customer> findAll() {
     	 return ((List<Customer>) repository  
-                 .findAll())  
-                 .stream()  
-                 .map(mapper::convertDataIntoDTO)  
-                         .collect(Collectors.toList());  
+                 .findAll());  
+                   
 	}
 	
 	public List<Customer> customerByTypePhone(PhoneEnum phone) {
@@ -64,6 +54,19 @@ public class CustomerService {
 		return repository.save(customer);
 	}
 
+	//@Transactional
+	public List<Customer> saveAll(Collection<Customer> entities) {
+
+		List<Customer> result = new ArrayList<Customer>();
+
+		for (Customer entity : entities) {
+			result.add(save(entity));
+		}
+
+		return result;
+	}
+	
+	
 	public Customer update(Long id, Customer customer) {
 		Customer object = findById(id); // if id exist jpa update object
 		object.setFirstName(customer.getFirstName());

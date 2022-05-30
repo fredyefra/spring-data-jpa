@@ -64,7 +64,7 @@ public class Customer implements Serializable {
 	public Address getAddress() {return address;}
     public void setAddress(Address address) {this.address = address;}
 
-    @OneToMany(cascade = {CascadeType.ALL},  fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "phone_id", unique = false)
     public Collection<Phone> getPhones() {return phones;}
 	public void setPhones(Collection<Phone> phones) {this.phones = phones;}
