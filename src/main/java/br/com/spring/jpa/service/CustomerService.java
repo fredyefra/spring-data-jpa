@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import br.com.spring.jpa.dto.CustomerDTO;
 import br.com.spring.jpa.dto.Mapper;
 import br.com.spring.jpa.enums.AddressEnum;
 import br.com.spring.jpa.enums.PhoneEnum;
@@ -25,11 +28,13 @@ public class CustomerService {
 	@Autowired
 	private Mapper mapper;
 	
-	public Collection<Customer> findAll() {
-    	 return ((List<Customer>) repository  
-                 .findAll());  
-                   
-	}
+	public Collection<CustomerDTO> findAll() {
+    	 return ((List<CustomerDTO>) repository
+    			 .findAll()  
+    			 .stream()  
+                 .map(mapper::convertEntityToDTO)  
+                         .collect(Collectors.toList()));    
+    }
 	
 	public List<Customer> customerByTypePhone(PhoneEnum phone) {
 
@@ -54,7 +59,7 @@ public class CustomerService {
 		return repository.save(customer);
 	}
 
-	//@Transactional
+	@Transactional
 	public List<Customer> saveAll(Collection<Customer> entities) {
 
 		List<Customer> result = new ArrayList<Customer>();
@@ -65,7 +70,6 @@ public class CustomerService {
 
 		return result;
 	}
-	
 	
 	public Customer update(Long id, Customer customer) {
 		Customer object = findById(id); // if id exist jpa update object

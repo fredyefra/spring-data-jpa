@@ -3,7 +3,6 @@ package br.com.spring.jpa.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,10 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -64,7 +61,7 @@ public class Customer implements Serializable {
 	public Address getAddress() {return address;}
     public void setAddress(Address address) {this.address = address;}
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "phone_id", unique = false)
     public Collection<Phone> getPhones() {return phones;}
 	public void setPhones(Collection<Phone> phones) {this.phones = phones;}
@@ -93,7 +90,4 @@ public class Customer implements Serializable {
 			return false;
 		return true;
 	}
-
-	
-	
 }
