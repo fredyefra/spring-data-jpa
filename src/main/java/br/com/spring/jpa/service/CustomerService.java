@@ -30,7 +30,7 @@ public class CustomerService {
 	
 	public Collection<CustomerDTO> findAll() {
     	 return ((List<CustomerDTO>) repository
-    			 .findAll()  
+    			 .findAll(CustomerSpecification.allCustomersByIdPhone())  
     			 .stream()  
                  .map(mapper::convertEntityToDTO)  
                          .collect(Collectors.toList()));    

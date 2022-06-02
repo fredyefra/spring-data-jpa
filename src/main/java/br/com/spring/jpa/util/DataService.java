@@ -51,8 +51,8 @@ public class DataService {
 		
 		Collection<Customer> customers = new LinkedList<Customer>((List.of(c1,c2)));
 		
-		//service.saveAll(customers);
+		service.saveAll(customers);
 		 
-		customerRepository.saveAll(customers);
+		//customerRepository.saveAll(customers);
 	}
 }

@@ -21,7 +21,6 @@ public class Phone implements Serializable {
 	private String number;
 	private PhoneEnum type;
 	
-	
 	public Phone() {
 		
 	}
@@ -81,5 +80,4 @@ public class Phone implements Serializable {
 			return false;
 		return true;
 	}
-	
 }

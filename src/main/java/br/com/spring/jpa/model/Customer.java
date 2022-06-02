@@ -55,13 +55,13 @@ public class Customer implements Serializable {
 	public String getLastName() {return lastName; }
 	public void setLastName(String lastName) {this.lastName = lastName; }
 	
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY) // Refactory remove CASCADE DATASERVICE remove, fetchType.LAZY
+	@OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) // Refactory remove CASCADE DATASERVICE remove, fetchType.LAZY
 	@JoinColumn(name = "address_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public Address getAddress() {return address;}
     public void setAddress(Address address) {this.address = address;}
 
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "phone_id", unique = false)
     public Collection<Phone> getPhones() {return phones;}
 	public void setPhones(Collection<Phone> phones) {this.phones = phones;}

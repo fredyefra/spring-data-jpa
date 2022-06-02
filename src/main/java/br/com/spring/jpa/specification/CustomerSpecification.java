@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Fetch;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
@@ -25,14 +24,6 @@ public class CustomerSpecification implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/**
-	* Lambda Specification
-	*/
-	public static Specification<Customer> byId(Long id) {
-		return (root, query, builder) -> 
-		  builder.equal(root.get(Customer_.id), id);
-	}
-	 
 	/**
 	* Lambda Specification
 	*/
@@ -70,21 +61,11 @@ public class CustomerSpecification implements Serializable {
 	/**
 	 * Lambda Specification 
 	 */
-	public static Specification<Customer> findAll(AddressEnum type) {
-		return (root, query, builder) -> {
-			
-			//Join<Customer, Address> addressJoin = root.fetch(Customer_.address);
-			
-			Fetch<Customer, Phone> fetch = root.fetch(Customer_.phones, JoinType.LEFT);
-			
-			//Predicate predicate = builder.equal(addressJoin.get(Address_.type), type);
-			
-			//query
-			    //.where(predicate);
-			
-			return null;
-
-		};
+	public static Specification<Customer> allCustomersByIdPhone() {
+	    return (root, query, criteriaBuilder) -> {
+	        Join<Customer, Phone> phoneJoin = root.join(Customer_.phones, JoinType.INNER);
+	        return criteriaBuilder.equal(phoneJoin.get(Phone_.id), 1L);
+	    };
 	} 
 	
 	/**

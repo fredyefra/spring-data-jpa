@@ -18,7 +18,7 @@ public class Mapper {
 
 		String firstName = customer.getFirstName();  
         String lastName = customer.getLastName();
-        //Address address = customer.getAddress();
+        Address address = customer.getAddress();
         
         List<Phone> phones = customer
         		.getPhones()
@@ -29,12 +29,10 @@ public class Mapper {
             phone.setNumber(temp.getNumber());
             phone.setType(temp.getType());
             
-            //phones.forEach(System.out::println);
-            
             return phone;
         }).collect(Collectors.toList());
 
-		return new CustomerDTO(null, firstName, lastName, null, phones);  
+		return new CustomerDTO(null, firstName, lastName, address, phones);  
 	}
 
     // OLD
