@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.spring.jpa.model.Address;
@@ -13,8 +14,7 @@ public class CustomerDTO implements Serializable {
 
 private static final long serialVersionUID = 1L;
 	
-    //@JsonIgnore
-	private Long id;
+    private Long id;
     private String firstName;
 	private String lastName;
     private Address address;
@@ -33,6 +33,7 @@ private static final long serialVersionUID = 1L;
 	    this.phones = phones;
 	}
 	
+	@JsonIgnore
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}
 	
