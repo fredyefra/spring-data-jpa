@@ -7,7 +7,6 @@ import java.util.Collection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import br.com.spring.jpa.model.Address;
 import br.com.spring.jpa.model.Phone;
 
 public class CustomerDTO implements Serializable {
@@ -17,14 +16,15 @@ private static final long serialVersionUID = 1L;
     private Long id;
     private String firstName;
 	private String lastName;
-    private Address address;
+	//private Address address; //VOLTAR AO PADRAO EXCLUIR O DTO
+	private AddressDTO address;
 	private Collection<Phone> phones = new ArrayList<Phone>();
     
 	public CustomerDTO() {
 		
 	}
 	
-	public CustomerDTO(Long id, String firstName, String lastName, Address address, Collection<Phone> phones) {
+	public CustomerDTO(Long id, String firstName, String lastName, AddressDTO address, Collection<Phone> phones) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -44,8 +44,8 @@ private static final long serialVersionUID = 1L;
 	public void setLastName(String lastName) {this.lastName = lastName; }
 	
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	public Address getAddress() {return address;}
-    public void setAddress(Address address) {this.address = address;}
+	public AddressDTO getAddress() {return address;}
+    public void setAddress(AddressDTO address) {this.address = address;}
 
     public Collection<Phone> getPhones() {return phones;}
 	public void setPhones(Collection<Phone> phones) {this.phones = phones;}

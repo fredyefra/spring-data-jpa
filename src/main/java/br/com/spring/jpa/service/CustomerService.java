@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.spring.jpa.dto.CustomerDTO;
-import br.com.spring.jpa.dto.Mapper;
+import br.com.spring.jpa.dto.MapperCustomer;
 import br.com.spring.jpa.enums.AddressEnum;
 import br.com.spring.jpa.enums.PhoneEnum;
 import br.com.spring.jpa.model.Customer;
@@ -26,13 +26,13 @@ public class CustomerService {
 	private CustomerRepository repository;
 
 	@Autowired
-	private Mapper mapper;
+	private MapperCustomer mapper;
 	
 	public Collection<CustomerDTO> findAll() {
     	 return ((List<CustomerDTO>) repository
     			 .findAll(CustomerSpecification.allCustomersByIdPhone())  
     			 .stream()  
-                 .map(mapper::convertEntityToDTO)  
+                 .map(mapper::convertCustomerIntoDTO)  
                          .collect(Collectors.toList()));    
     }
 	

@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.spring.jpa.enums.AddressEnum;
 import br.com.spring.jpa.model.Address;
 
@@ -33,6 +35,7 @@ public class AddressDTO implements Serializable {
 	    this.type = type;
 	}
 
+	@JsonIgnore
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}
 	
