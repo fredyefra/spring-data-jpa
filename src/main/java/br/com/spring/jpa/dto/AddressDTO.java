@@ -2,17 +2,9 @@ package br.com.spring.jpa.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.spring.jpa.enums.AddressEnum;
-import br.com.spring.jpa.model.Address;
 
 public class AddressDTO implements Serializable {
 	private static final long serialVersionUID = 1L;

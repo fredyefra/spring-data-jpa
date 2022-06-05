@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -21,49 +22,55 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Customer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private String firstName;
 	private String lastName;
-    private Address address;
+	private Address address;
 	private Collection<Phone> phones = new ArrayList<Phone>();
-    
+
 	public Customer() {
-		
+
 	}
-	
+
 	public Customer(Long id, String firstName, String lastName, Address address, Collection<Phone> phones) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-	    this.address = address;
-	    this.phones = phones;
+		this.address = address;
+		this.phones = phones;
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "ID")
 	public Long getId() {return id; }
 	public void setId(Long id) {this.id = id; }
-	
-	@Column(name = "firstName")
+
+	@Column(name = "FIRST_NAME")
 	public String getFirstName() {return firstName; }
 	public void setFirstName(String firstName) {this.firstName = firstName; }
-	
-	@Column(name = "lastName")
+
+	@Column(name = "LAST_NAME")
 	public String getLastName() {return lastName; }
 	public void setLastName(String lastName) {this.lastName = lastName; }
-	
+
 	@OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) // Refactory remove CASCADE DATASERVICE remove, fetchType.LAZY
-	@JoinColumn(name = "address_id")
+	@JoinColumn(name = "ADDRESS_FK")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public Address getAddress() {return address;}
-    public void setAddress(Address address) {this.address = address;}
+	public void setAddress(Address address) {this.address = address;}
 
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "phone_id", unique = false)
-    public Collection<Phone> getPhones() {return phones;}
+	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinTable(
+			name="CUST_PHONE",
+			joinColumns=
+			@JoinColumn(name="CUST_FK", referencedColumnName="ID"),
+			inverseJoinColumns=
+			@JoinColumn(name="PHONE_FK", referencedColumnName="ID")
+			)
+	public Collection<Phone> getPhones() {return phones;}
 	public void setPhones(Collection<Phone> phones) {this.phones = phones;}
 
 	@Override
