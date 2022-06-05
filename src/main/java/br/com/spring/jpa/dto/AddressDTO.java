@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.spring.jpa.enums.AddressEnum;
 
 public class AddressDTO implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -50,6 +51,7 @@ public class AddressDTO implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

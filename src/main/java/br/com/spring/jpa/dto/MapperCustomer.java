@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.spring.jpa.model.Address;
 import br.com.spring.jpa.model.Customer;
 import br.com.spring.jpa.model.Phone;
 
@@ -17,14 +16,19 @@ public class MapperCustomer {
 	@Autowired
 	private MapperAddress mapperAddress;
 
-	// Lambda Expression
+	@Autowired
+	private MapperPhone mapperPhone;
+	
+	/** Implement Entity to DTO - BoilerpLate OLD 
+	 */
 	public CustomerDTO convertCustomerIntoDTO(Customer customer) {  
 
 		String firstName = customer.getFirstName();  
 		String lastName = customer.getLastName();
-		//Address address = customer.getAddress();
-		AddressDTO addressDTO = mapperAddress.convertAddressIntoDTO(customer);
 
+		AddressDTO addressDTO = mapperAddress.addressToDTO(customer);
+		List<PhoneDTO> phoneDTOs = mapperPhone.phonesToDTO(customer);
+		
 		List<Phone> phones = customer
 				.getPhones()
 				.stream()
@@ -40,17 +44,17 @@ public class MapperCustomer {
 		return new CustomerDTO(null, firstName, lastName, addressDTO, phones);  
 	}
 
-	// OLD
+	/** Implement Entity to DTO - BoilerpLate OLD 
+	 */
 	public CustomerDTO convertDataIntoDTO (Customer customer) {  
 
 		Long id = customer.getId();
 		String firstName = customer.getFirstName();  
 		String lastName = customer.getLastName();  
-		//Address address = customer.getAddress();  
 		AddressDTO addressDTO = mapperAddress.convertAddressIntoDTO(customer);
 		Collection<Phone> phones = customer.getPhones();
 
-		return new CustomerDTO(id, firstName, lastName, addressDTO, phones);  
+		return new CustomerDTO(id, firstName, lastName, addressDTO, null);  
 
 	}
 }

@@ -74,5 +74,4 @@ private static final long serialVersionUID = 1L;
 			return false;
 		return true;
 	}
-
 }
