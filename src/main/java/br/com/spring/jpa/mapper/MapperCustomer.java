@@ -1,4 +1,4 @@
-package br.com.spring.jpa.dto;
+package br.com.spring.jpa.mapper;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.spring.jpa.dto.AddressDTO;
+import br.com.spring.jpa.dto.CustomerDTO;
+import br.com.spring.jpa.dto.PhoneDTO;
 import br.com.spring.jpa.model.Customer;
 import br.com.spring.jpa.model.Phone;
 
@@ -27,7 +30,7 @@ public class MapperCustomer {
 		String lastName = customer.getLastName();
 
 		AddressDTO addressDTO = mapperAddress.addressToDTO(customer);
-		List<PhoneDTO> phoneDTOs = mapperPhone.phonesToDTO(customer);
+		//List<PhoneDTO> phoneDTOs = mapperPhone.phonesToDTO(customer);
 		
 		List<Phone> phones = customer
 				.getPhones()
@@ -51,9 +54,10 @@ public class MapperCustomer {
 		Long id = customer.getId();
 		String firstName = customer.getFirstName();  
 		String lastName = customer.getLastName();  
-		AddressDTO addressDTO = mapperAddress.convertAddressIntoDTO(customer);
-		Collection<Phone> phones = customer.getPhones();
+		AddressDTO addressDTO = mapperAddress.convertAddressInDTO(customer);
+		Collection<PhoneDTO> phonesDTO = mapperPhone.phonesToDTO(customer);
 
+        //return new CustomerDTO(id, firstName, lastName, addressDTO, phonesEntity);
 		return new CustomerDTO(id, firstName, lastName, addressDTO, null);  
 
 	}

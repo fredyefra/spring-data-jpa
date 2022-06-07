@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.spring.jpa.dto.CustomerDTO;
-import br.com.spring.jpa.dto.MapperCustomer;
 import br.com.spring.jpa.enums.AddressEnum;
 import br.com.spring.jpa.enums.PhoneEnum;
+import br.com.spring.jpa.mapper.MapperCustomer;
 import br.com.spring.jpa.model.Customer;
 import br.com.spring.jpa.repository.CustomerRepository;
 import br.com.spring.jpa.specification.CustomerSpecification;

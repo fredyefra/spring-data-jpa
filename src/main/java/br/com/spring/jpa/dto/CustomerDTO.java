@@ -16,7 +16,6 @@ private static final long serialVersionUID = 1L;
     private Long id;
     private String firstName;
 	private String lastName;
-	//private Address address; //VOLTAR AO PADRAO EXCLUIR O DTO
 	private AddressDTO address;
 	private Collection<Phone> phones = new ArrayList<Phone>();
     
