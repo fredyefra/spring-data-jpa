@@ -37,8 +37,7 @@ public class MapperAddress {
 	public AddressDTO addressToDTO(Customer customer) {
 
 		//this.modelMapper = new ModelMapper();
-
-		AddressDTO addressDTO = modelMapper.map(customer.getAddress(), AddressDTO.class);
+    	AddressDTO addressDTO = modelMapper.map(customer.getAddress(), AddressDTO.class);
 
 		return addressDTO;
 	}
@@ -50,7 +49,6 @@ public class MapperAddress {
 	public Address dtoToAddress(CustomerDTO customerDTO) {
 
 		//this.modelMapper = new ModelMapper();
-
 		Address address = modelMapper.map(customerDTO.getAddress(), Address.class);
 
 		return address;
