@@ -64,9 +64,9 @@ public class Customer implements Serializable {
 
 	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinTable(
-			name="CUST_PHONE",
+			name="CUSTOMER_PHONE",
 			joinColumns=
-			@JoinColumn(name="CUST_FK", referencedColumnName="ID"),
+			@JoinColumn(name="CUSTOMER_FK", referencedColumnName="ID"),
 			inverseJoinColumns=
 			@JoinColumn(name="PHONE_FK", referencedColumnName="ID")
 			)
