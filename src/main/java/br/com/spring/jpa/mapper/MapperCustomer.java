@@ -21,16 +21,19 @@ public class MapperCustomer {
 
 	@Autowired
 	private MapperPhone mapperPhone;
-	
-	/** Implement Entity to DTO - BoilerpLate OLD 
+
+	/**
+	 * Entity to DTO - ModelMapper BoilerpLate OLD - NOT ERASE IN REFACTORY
+	 * 
+	 * @param {@link Customer}
+	 * @return {@code List Phone}
 	 */
-	public CustomerDTO convertCustomerIntoDTO(Customer customer) {  
+	public CustomerDTO customerInDTO(Customer customer) {  
 
 		String firstName = customer.getFirstName();  
 		String lastName = customer.getLastName();
 
 		AddressDTO addressDTO = mapperAddress.addressToDTO(customer);
-		//List<PhoneDTO> phoneDTOs = mapperPhone.phonesToDTO(customer);
 		
 		List<Phone> phones = customer
 				.getPhones()
@@ -44,21 +47,42 @@ public class MapperCustomer {
 					return phone;
 				}).collect(Collectors.toList());
 
-		return new CustomerDTO(null, firstName, lastName, addressDTO, phones);  
+		return new CustomerDTO(null, firstName, lastName, addressDTO, phones);   
 	}
 
-	/** Implement Entity to DTO - BoilerpLate OLD 
+	/**
+	 * Entity to DTO - ModelMapper BoilerpLate OLD - NOT ERASE IN REFACTORY
+	 * 
+	 * @param {@link Customer}
+	 * @return {@code CustomerDTO}
 	 */
 	public CustomerDTO convertDataIntoDTO (Customer customer) {  
-
+		
 		Long id = customer.getId();
 		String firstName = customer.getFirstName();  
 		String lastName = customer.getLastName();  
-		AddressDTO addressDTO = mapperAddress.convertAddressInDTO(customer);
+		AddressDTO addressDTO = mapperAddress.addressInDTO(customer);
 		Collection<PhoneDTO> phonesDTO = mapperPhone.phonesToDTO(customer);
-
-        //return new CustomerDTO(id, firstName, lastName, addressDTO, phonesEntity);
+		
+		//return new CustomerDTO(id, firstName, lastName, addressDTO, phonesEntity);
 		return new CustomerDTO(id, firstName, lastName, addressDTO, null);  
+		
+	}
+	
+	/** 
+	 * Entity to DTO - ModelMapper
+	 * 
+	 * @param {@link Customer}  
+	 * @return {@link CustomerDTO}
+	 */
+	public CustomerDTO customerToDTO(Customer customer) {  
 
+		String firstName = customer.getFirstName();  
+		String lastName = customer.getLastName();
+
+		AddressDTO addressDTO = mapperAddress.addressToDTO(customer);
+		List<PhoneDTO> phoneDTOs = mapperPhone.phonesToDTO(customer);
+		
+		return new CustomerDTO(firstName, lastName, addressDTO, phoneDTOs); 
 	}
 }

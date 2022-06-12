@@ -38,6 +38,4 @@ public class CreditCardDTO implements Serializable {
 	public FlagEnum getFlagEnum() {return flagEnum;}
 	public void setFlagEnum(FlagEnum flagEnum) {this.flagEnum = flagEnum;} 
 
-    
-    
-}
+ }

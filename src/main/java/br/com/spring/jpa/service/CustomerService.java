@@ -32,7 +32,7 @@ public class CustomerService {
     	 return ((List<CustomerDTO>) repository
     			 .findAll()  
     			 .stream()  
-                 .map(mapper::convertCustomerIntoDTO)  
+                 .map(mapper::customerToDTO)  
                          .collect(Collectors.toList()));    
     }
 	

@@ -30,7 +30,7 @@ public class Customer implements Serializable {
 	private Collection<Phone> phones = new ArrayList<Phone>();
 
 	public Customer() {
-
+		
 	}
 
 	public Customer(Long id, String firstName, String lastName, Address address, Collection<Phone> phones) {

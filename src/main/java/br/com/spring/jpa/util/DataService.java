@@ -30,12 +30,12 @@ public class DataService {
 		Address a1 = new Address(null, "Baker Street ", "Arizona", "1111-1111", AddressEnum.COMMERCIAL); 
 		Address a2 = new Address(null, "7º Avennue ", "New York", "2222-2222",AddressEnum.RESIDENTIAL);
 		
-		Phone homeRobert = new Phone(null,"1111-1111" ,PhoneEnum.HOME);
-		Phone cellRobert = new Phone(null,"2222-2222" ,PhoneEnum.CELL);
-		Phone jobRobert = new Phone(null,"3333-3333" ,PhoneEnum.JOB);
+		Phone homeRobert = new Phone(null,"(21) 1111-1111" ,PhoneEnum.HOME);
+		Phone cellRobert = new Phone(null,"(31) 2222-2222" ,PhoneEnum.CELL);
+		Phone jobRobert = new Phone(null,"(51) 3333-3333" ,PhoneEnum.JOB);
 		
-		Phone homeJames = new Phone(null,"4444-4444" ,PhoneEnum.HOME);
-		Phone jobJames = new Phone(null,"5555-5555" ,PhoneEnum.JOB);
+		Phone homeJames = new Phone(null,"(61) 4444-4444" ,PhoneEnum.HOME);
+		Phone jobJames = new Phone(null,"(11) 5555-5555" ,PhoneEnum.JOB);
 		
 		Customer c1 = new Customer();
 		c1.setFirstName("Robert C. Martin");
@@ -50,6 +50,10 @@ public class DataService {
 		c2.getPhones().addAll(List.of(homeJames,jobJames));
 		
 		Collection<Customer> customers = new LinkedList<Customer>((List.of(c1,c2)));
+		
+		//Collection<Customer> customers = new LinkedList<>();
+		
+		//customers.stream().forEach(c-> service.save(c));
 		
 		service.saveAll(customers);
 	}

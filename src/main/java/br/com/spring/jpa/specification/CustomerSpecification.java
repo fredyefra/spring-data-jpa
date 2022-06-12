@@ -25,7 +25,9 @@ public class CustomerSpecification implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Lambda Specification
+	 * Lambda Specification - Customer from firstname
+	 * @param firstName
+	 * @return {@code Customer}
 	 */
 	public static Specification<Customer> byFirstName(String firstName) {
 		return (root, query, builder) -> 
@@ -33,7 +35,9 @@ public class CustomerSpecification implements Serializable {
 	}
 
 	/**
-	 * Lambda Specification 
+	 * Lambda Specification - Customer from lastname
+	 * @param lastName
+	 * @return {@code Customer}
 	 */
 	public static Specification<Customer> byLastName(String lastName) {
 		return (root, query, builder) -> 
@@ -41,7 +45,9 @@ public class CustomerSpecification implements Serializable {
 	}
 
 	/**
-	 * Lambda Specification 
+	 * Lambda Specification - Customer from Address type
+	 * @param {@link AddressEnum}
+	 * @return {@code Customer}
 	 */
 	public static Specification<Customer> customerByTypeAddress(AddressEnum type) {
 		return (root, query, builder) -> {
@@ -59,7 +65,8 @@ public class CustomerSpecification implements Serializable {
 	} 
 
 	/**
-	 * Lambda Specification 
+	 * Lambda Specification - Customer from Phone id
+	 * @return {@code Customer}
 	 */
 	public static Specification<Customer> allCustomersByIdPhone() {
 		return (root, query, criteriaBuilder) -> {
@@ -107,7 +114,6 @@ public class CustomerSpecification implements Serializable {
 
 		};
 	}
-
 
 	/**
 	 * Common Specification
