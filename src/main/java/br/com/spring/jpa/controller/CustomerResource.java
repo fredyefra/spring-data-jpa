@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,16 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.spring.jpa.dto.CustomerDTO;
 import br.com.spring.jpa.model.Customer;
 import br.com.spring.jpa.service.CustomerService;
+import io.swagger.annotations.Api;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
+@Api(value = "customer")
 @RestController
+@CrossOrigin("http://localhost:8080")
 @RequestMapping(value = "/customers")
-@EnableHypermediaSupport(type = { EnableHypermediaSupport.HypermediaType.HAL })
 public class CustomerResource {
 
 	@Autowired
 	private CustomerService service;
 
+	//@ApiOperation(value = "{Find All Customers, phones and address}")
 	@GetMapping
 	public ResponseEntity<Collection<CustomerDTO>> findAll() {
     Collection<CustomerDTO> customers = service.findAll();
