@@ -14,7 +14,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>spring-data-jpa</name>
-	<description>Project Spring Boot with spring jpa and speficification.</description>
+	<description>Project Spring Boot with spring jpa speficification and swagger.</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
