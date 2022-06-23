@@ -28,7 +28,8 @@ public class Customer implements Serializable {
 	private String lastName;
 	private Address address;
 	private Collection<Phone> phones = new ArrayList<Phone>();
-
+    private CreditCard creditCard;
+	
 	public Customer() {
 		
 	}
@@ -73,6 +74,18 @@ public class Customer implements Serializable {
 	public Collection<Phone> getPhones() {return phones;}
 	public void setPhones(Collection<Phone> phones) {this.phones = phones;}
 
+	@OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) // Refactory remove CASCADE DATASERVICE remove, fetchType.LAZY
+	@JoinTable(
+			name="CUSTOMER_CARD",
+			joinColumns=
+			@JoinColumn(name="CUSTOMER_FK", referencedColumnName="ID"),
+			inverseJoinColumns=
+			@JoinColumn(name="CARD_FK", referencedColumnName="ID")
+			)
+	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	public CreditCard getCreditCard() {return creditCard;}
+	public void setCreditCard(CreditCard creditCard) {this.creditCard = creditCard;}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
