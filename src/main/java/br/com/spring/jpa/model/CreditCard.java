@@ -27,10 +27,11 @@ public class CreditCard implements Serializable {
 		
 	}
 	
-    public CreditCard(Long id,String number) {
+    public CreditCard(Long id,String number, FlagEnum flagEnum) {
 		super();
 		this.id = id;
 		this.number = number;
+        this.flagEnum = flagEnum;
     }
 	
     @Id
@@ -47,10 +48,10 @@ public class CreditCard implements Serializable {
 	public String getNumber() {return number;}
 	public void setNumber(String number) {this.number = number;}
 	
-	//@Enumerated(EnumType.STRING)
-	//@Column(name = "FLAG_ENUM")
-	//public FlagEnum getFlagEnum() {return flagEnum;}
-	//public void setFlagEnum(FlagEnum flagEnum) {this.flagEnum = flagEnum;} 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "FLAG_ENUM")
+	public FlagEnum getFlagEnum() {return flagEnum;}
+	public void setFlagEnum(FlagEnum flagEnum) {this.flagEnum = flagEnum;} 
 
 	//@Column(name = "LIMIT")
     //public Long getLimit() {return limit;}

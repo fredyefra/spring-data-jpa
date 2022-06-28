@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.spring.jpa.dto.AddressDTO;
+import br.com.spring.jpa.dto.CreditCardDTO;
 import br.com.spring.jpa.dto.CustomerDTO;
 import br.com.spring.jpa.dto.PhoneDTO;
 import br.com.spring.jpa.model.Customer;
@@ -22,6 +23,9 @@ public class MapperCustomer {
 	@Autowired
 	private MapperPhone mapperPhone;
 
+	@Autowired
+	private MapperCreditCard mapperCreditCard;
+	
 	/**
 	 * Entity to DTO - ModelMapper BoilerpLate OLD - NOT ERASE IN REFACTORY
 	 * 
@@ -82,7 +86,8 @@ public class MapperCustomer {
 
 		AddressDTO addressDTO = mapperAddress.addressToDTO(customer);
 		List<PhoneDTO> phoneDTOs = mapperPhone.phonesToDTO(customer);
+		CreditCardDTO creditCardDTO = mapperCreditCard.creditCardToDTO(customer);
 		
-		return new CustomerDTO(firstName, lastName, addressDTO, phoneDTOs); 
+		return new CustomerDTO(firstName, lastName, addressDTO, phoneDTOs, creditCardDTO);
 	}
 }

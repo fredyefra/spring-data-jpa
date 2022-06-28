@@ -39,7 +39,7 @@ public class DataService {
 		Phone homeJames = new Phone(null,"(61) 4444-4444" ,PhoneEnum.HOME);
 		Phone jobJames = new Phone(null,"(11) 5555-5555" ,PhoneEnum.JOB);
 		
-		CreditCard card = new CreditCard(null,"4444-2222-1111-0000");
+		CreditCard card = new CreditCard(null,"4444-2222-1111-0000", FlagEnum.ELO);
 		
 		
 		

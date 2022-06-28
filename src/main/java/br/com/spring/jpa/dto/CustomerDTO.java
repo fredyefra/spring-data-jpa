@@ -19,10 +19,7 @@ public class CustomerDTO implements Serializable {
 	private AddressDTO address;
 	private Collection<Phone> phones = new ArrayList<>();
 	private Collection<PhoneDTO> phonesDTO = new ArrayList<>();
-	
-	public CustomerDTO() {
-
-	}
+	private CreditCardDTO creditCardDTO;
 
 	public CustomerDTO(Long id, String firstName, String lastName, AddressDTO address, Collection<Phone> phones) {
 		super();
@@ -33,12 +30,13 @@ public class CustomerDTO implements Serializable {
 		this.phones = phones;
 	}
 
-	public CustomerDTO(String firstName, String lastName, AddressDTO address, Collection<PhoneDTO> phonesDTO) {
+	public CustomerDTO(String firstName, String lastName, AddressDTO address, Collection<PhoneDTO> phonesDTO, CreditCardDTO creditCardDTO) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.phonesDTO = phonesDTO;
+	    this.creditCardDTO = creditCardDTO;
 	}
 	
 	@JsonIgnore
@@ -62,6 +60,9 @@ public class CustomerDTO implements Serializable {
 	public Collection<PhoneDTO> getPhonesDTO() {return phonesDTO;}
 	public void setPhonesDTO(Collection<PhoneDTO> phonesDTO) {this.phonesDTO = phonesDTO;}
 
+	public CreditCardDTO getCreditCardDTO() {return creditCardDTO;}
+	public void setCreditCardDTO(CreditCardDTO creditCardDTO) {this.creditCardDTO = creditCardDTO;}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
