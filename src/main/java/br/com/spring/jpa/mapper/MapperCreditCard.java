@@ -28,6 +28,7 @@ public class MapperCreditCard {
 		Long id = customer.getCreditCard().getId();
 		String number = customer.getCreditCard().getNumber();
 		FlagEnum flagEnum = customer.getCreditCard().getFlagEnum();
+		//Long limit = customer.getCreditCard().getLimit();
 		return new CreditCardDTO(id, number, flagEnum);
 	}
 

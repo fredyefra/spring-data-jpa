@@ -41,9 +41,6 @@ public class DataService {
 		
 		CreditCard card = new CreditCard(null,"4444-2222-1111-0000", FlagEnum.ELO);
 		
-		
-		
-		
 		Customer c1 = new Customer();
 		c1.setFirstName("Robert C. Martin");
 		c1.setLastName("Martin");

@@ -11,10 +11,10 @@ public class CreditCardDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	//private Date expirateDate;
 	private  String number;
     private FlagEnum flagEnum;
-    //private Long limit;
+    private Long limit;
+    //private Date expirateDate;
     
     public CreditCardDTO() {
 
