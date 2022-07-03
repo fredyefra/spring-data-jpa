@@ -1,5 +1,6 @@
 package br.com.spring.jpa.util;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,26 +40,25 @@ public class DataService {
 		Phone homeJames = new Phone(null,"(61) 4444-4444" ,PhoneEnum.HOME);
 		Phone jobJames = new Phone(null,"(11) 5555-5555" ,PhoneEnum.JOB);
 		
-		CreditCard card = new CreditCard(null,"4444-2222-1111-0000", FlagEnum.ELO);
+		CreditCard eloCardRobert = new CreditCard(null,"65444-2222-1111-0000", FlagEnum.ELO, 300.0, LocalDate.now().plusYears(3));
 		
 		Customer c1 = new Customer();
 		c1.setFirstName("Robert C. Martin");
 		c1.setLastName("Martin");
 		c1.setAddress(a1);
 		c1.getPhones().addAll(List.of(homeRobert,cellRobert,jobRobert));
-		c1.setCreditCard(card);
+		c1.setCreditCard(eloCardRobert);
 		
-		//Customer c2 = new Customer();
-		//c2.setFirstName("James Gosling");
-		//c2.setLastName("Gosling");
-		//c2.setAddress(a2);
-		//c2.getPhones().addAll(List.of(homeJames,jobJames));
+		CreditCard masterCardJames = new CreditCard(null,"5411-2299-3311-0000", FlagEnum.MASTERCARD, 300.0, LocalDate.now().plusYears(3));
 		
-		
+		Customer c2 = new Customer();
+		c2.setFirstName("James Gosling");
+		c2.setLastName("Gosling");
+		c2.setAddress(a2);
+		c2.getPhones().addAll(List.of(homeJames,jobJames));
+		c2.setCreditCard(masterCardJames);
 		
 		Collection<Customer> customers = new LinkedList<Customer>((List.of(c1)));
-		
-		
 		
 		service.saveAll(customers);
 	}

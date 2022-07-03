@@ -1,6 +1,7 @@
 package br.com.spring.jpa.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.spring.jpa.enums.FlagEnum;
 
@@ -20,18 +23,20 @@ public class CreditCard implements Serializable {
 	private Long id;
 	private  String number;
     private FlagEnum flagEnum;
-    private Long limit;
-    //private Date expirateDate;
+    private Double limit;
+    private LocalDate expirateDate;
     
     public CreditCard() {
 		
 	}
 	
-    public CreditCard(Long id,String number, FlagEnum flagEnum) {
+    public CreditCard(Long id,String number, FlagEnum flagEnum, Double limit, LocalDate expirateDate) {
 		super();
 		this.id = id;
 		this.number = number;
         this.flagEnum = flagEnum;
+        this.limit = limit;
+        this.expirateDate = expirateDate;
     }
 	
     @Id
@@ -40,11 +45,7 @@ public class CreditCard implements Serializable {
     public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}
 	
-	//@Column(name = "EXPIRATE_DATE")
-	//public Date getExpirateDate() {return expirateDate;}
-	//public void setExpirateDate(Date expirateDate) {this.expirateDate = expirateDate;}
-	
-	@Column(name = "NUMBER")
+	@Column(name = "CARD_NUMBER")
 	public String getNumber() {return number;}
 	public void setNumber(String number) {this.number = number;}
 	
@@ -53,7 +54,13 @@ public class CreditCard implements Serializable {
 	public FlagEnum getFlagEnum() {return flagEnum;}
 	public void setFlagEnum(FlagEnum flagEnum) {this.flagEnum = flagEnum;} 
 
-	//@Column(name = "LIMIT")
-    //public Long getLimit() {return limit;}
-    //public void setLimit(Long limit) {this.limit = limit;}
+	@Column(name = "CARD_LIMIT")
+    //@NumberFormat(pattern = "#,##.00", style = Style.NUMBER)
+	public Double getLimit() {return limit;}
+    public void setLimit(Double limit) {this.limit = limit;}
+
+    @Column(name = "CARD_EXPIRATE_DATE")
+    @JsonFormat(pattern="yyyy-MM-dd")
+    public LocalDate getExpirateDate() {return expirateDate;}
+    public void setExpirateDate(LocalDate expirateDate) {this.expirateDate = expirateDate;}
 }

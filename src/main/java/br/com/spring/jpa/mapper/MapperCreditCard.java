@@ -1,5 +1,7 @@
 package br.com.spring.jpa.mapper;
 
+import java.time.LocalDate;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -21,21 +23,22 @@ public class MapperCreditCard {
 	/**
 	 * Entity to DTO - ModelMapper BoilerpLate OLD
 	 * 
-	 * @param {@link CreditCard}
+	 * @param {@link Customer}
 	 * @return {@code CreditCard}
 	 */
 	public CreditCardDTO creditCardInDTO(Customer customer) {
 		Long id = customer.getCreditCard().getId();
 		String number = customer.getCreditCard().getNumber();
 		FlagEnum flagEnum = customer.getCreditCard().getFlagEnum();
-		//Long limit = customer.getCreditCard().getLimit();
-		return new CreditCardDTO(id, number, flagEnum);
+		Double limit = customer.getCreditCard().getLimit();
+		LocalDate expirateDate = customer.getCreditCard().getExpirateDate();
+		return new CreditCardDTO(id, number, flagEnum, limit,expirateDate);
 	}
 
 	/**
 	 * Entity to DTO - ModelMapper
 	 * 
-	 * @param {@link CreditCard}}
+	 * @param {@link Customer}
 	 * @return {@link CreditCardDTO}
 	 */
 	public CreditCardDTO creditCardToDTO(Customer customer) {
@@ -48,7 +51,7 @@ public class MapperCreditCard {
 	/**
 	 * DTO to Entity - ModelMapper
 	 * 
-	 * @param {@link CreditCardDTO}
+	 * @param {@link CustomerDTO}
 	 * @return {@link CreditCard}
 	 */
 	public CreditCard dtoToCreditCard(CustomerDTO customerDTO) {
