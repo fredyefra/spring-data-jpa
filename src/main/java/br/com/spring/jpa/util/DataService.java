@@ -49,7 +49,7 @@ public class DataService {
 		c1.getPhones().addAll(List.of(homeRobert,cellRobert,jobRobert));
 		c1.setCreditCard(eloCardRobert);
 		
-		CreditCard masterCardJames = new CreditCard(null,"5411-2299-3311-0000", FlagEnum.MASTERCARD, 300.0, LocalDate.now().plusYears(3));
+		CreditCard masterCardJames = new CreditCard(null,"5411-2299-3311-0000", FlagEnum.MASTERCARD, 500.0, LocalDate.now().plusYears(3));
 		
 		Customer c2 = new Customer();
 		c2.setFirstName("James Gosling");
