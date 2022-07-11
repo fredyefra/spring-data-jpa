@@ -58,7 +58,7 @@ public class DataService {
 		c2.getPhones().addAll(List.of(homeJames,jobJames));
 		c2.setCreditCard(masterCardJames);
 		
-		Collection<Customer> customers = new LinkedList<Customer>((List.of(c1)));
+		Collection<Customer> customers = new LinkedList<Customer>((List.of(c1,c2)));
 		
 		service.saveAll(customers);
 	}
