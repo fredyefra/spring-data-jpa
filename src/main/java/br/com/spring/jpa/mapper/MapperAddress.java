@@ -42,9 +42,9 @@ public class MapperAddress {
 	 */
 	public AddressDTO addressToDTO(Customer customer) {
 
-		AddressDTO addressDTO = modelMapper.map(customer.getAddress(), AddressDTO.class);
+		//AddressDTO addressDTO = modelMapper.map(customer.getAddress(), AddressDTO.class);
 
-		return addressDTO;
+		return modelMapper.map(customer.getAddress(), AddressDTO.class);
 	}
 
 	/**
